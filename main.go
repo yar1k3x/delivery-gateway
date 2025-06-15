@@ -4,13 +4,22 @@ import (
 	"DeliveryGateway/client"
 	"DeliveryGateway/handlers"
 	"log"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
-
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"}, // или "*" если нужно на время открыть для всех
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 	//transportGrpcClient, err := client.NewTransportServiceClient(os.Getenv("TRANSPORT_MANAGEMENT_SERVICE_URL"))
 	transportGrpcClient, err := client.NewTransportServiceClient("trolley.proxy.rlwy.net:27826")
 	if err != nil {
