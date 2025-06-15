@@ -1,6 +1,7 @@
 package client
 
 import (
+	auth_proto "DeliveryGateway/proto/auth"
 	delivery_proto "DeliveryGateway/proto/delivery"
 	transport_proto "DeliveryGateway/proto/transport"
 	"context"
@@ -14,6 +15,9 @@ type TransportClient struct {
 }
 type DeliveryClient struct {
 	Client delivery_proto.DeliveryRequestServiceClient
+}
+type AuthClient struct {
+	Client auth_proto.AuthServiceClient
 }
 
 func NewTransportServiceClient(addr string) (*TransportClient, error) {
@@ -35,6 +39,17 @@ func NewDeliveryRequestServiceClient(addr string) (*DeliveryClient, error) {
 
 	return &DeliveryClient{
 		Client: delivery_proto.NewDeliveryRequestServiceClient(conn),
+	}, nil
+}
+
+func NewAuthServiceClient(addr string) (*AuthClient, error) {
+	conn, err := grpc.Dial(addr, grpc.WithInsecure())
+	if err != nil {
+		return nil, err
+	}
+
+	return &AuthClient{
+		Client: auth_proto.NewAuthServiceClient(conn),
 	}, nil
 }
 

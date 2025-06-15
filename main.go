@@ -22,6 +22,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to connect to gRPC service: %v", err)
 	}
+	authGrpcClient, err := client.NewAuthServiceClient("shinkansen.proxy.rlwy.net:17837")
+	if err != nil {
+		log.Fatalf("failed to connect to AuthService: %v", err)
+	}
 
 	transportApi := r.Group("/transport")
 	{
@@ -38,6 +42,12 @@ func main() {
 		deliveryApi.GET("/requests", handlers.GetDeliveryRequests(deliveryGrpcClient))
 		deliveryApi.PUT("/update", handlers.UpdateDeliveryRequest(deliveryGrpcClient))
 		deliveryApi.DELETE("/delete/:id", handlers.DeleteDeliveryRequest(deliveryGrpcClient))
+	}
+
+	authApi := r.Group("/auth")
+	{
+		authApi.POST("/register", handlers.Register(authGrpcClient))
+		authApi.POST("/login", handlers.Login(authGrpcClient))
 	}
 
 	err = r.Run(":8080")
