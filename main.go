@@ -4,6 +4,7 @@ import (
 	"DeliveryGateway/client"
 	"DeliveryGateway/handlers"
 	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,13 +12,14 @@ import (
 func main() {
 	r := gin.Default()
 
-	//grpcClient, err := client.NewTransportServiceClient(os.Getenv("TRANSPORT_MANAGEMENT_SERVICE_URL"))
-	transportGrpcClient, err := client.NewTransportServiceClient("trolley.proxy.rlwy.net:27826")
+	transportGrpcClient, err := client.NewTransportServiceClient(os.Getenv("TRANSPORT_MANAGEMENT_SERVICE_URL"))
+	//transportGrpcClient, err := client.NewTransportServiceClient("trolley.proxy.rlwy.net:27826")
 	if err != nil {
 		log.Fatalf("failed to connect to transport-manager-service: %v", err)
 	}
 
-	deliveryGrpcClient, err := client.NewDeliveryRequestServiceClient("ballast.proxy.rlwy.net:22723")
+	deliveryGrpcClient, err := client.NewDeliveryRequestServiceClient(os.Getenv("DRS_URL"))
+	//deliveryGrpcClient, err := client.NewDeliveryRequestServiceClient("ballast.proxy.rlwy.net:22723")
 	if err != nil {
 		log.Fatalf("failed to connect to gRPC service: %v", err)
 	}
