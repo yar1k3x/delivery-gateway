@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package drs;
+import "google/protobuf/wrappers.proto";
+
+option go_package = "/proto/delivery;proto";
+
+service DeliveryRequestService {
+  rpc CreateRequest(CreateRequestInput) returns (CreateRequestResponse);
+  rpc GetRequest(GetRequestInput) returns (GetRequestResponse);
+  rpc UpdateRequest(UpdateRequestInput) returns (UpdateRequestResponse);
+  rpc DeleteRequest(DeleteRequestInput) returns (DeleteRequestResponse);
+}
+
+message CreateRequestInput {
+  float weight = 1;
+  string from_location = 2;
+  string to_location = 3;
+  string preferred_date = 4;
+  int32 created_by = 5;
+  int32 responsible_id = 6;
+  string created_at = 7;
+}
+
+message CreateRequestResponse {
+  string request_id = 1;
+}
+
+message GetRequestInput {
+  google.protobuf.Int32Value user_id = 1;
+  google.protobuf.Int32Value status_id = 2;
+}
+
+message GetRequestResponse {
+  repeated DeliveryRequest requests = 1;
+}
+
+message DeliveryRequest {
+  int32 id = 1;
+  float weight = 2;
+  string from_location = 3;
+  string to_location = 4;
+  string preferred_date = 5;
+  int32 created_by = 6;
+  int32 responsible_id = 7;
+  int32 status_id = 8;
+  string created_at = 9;
+}
+
+message UpdateRequestInput {
+  google.protobuf.FloatValue weight = 1;
+  google.protobuf.StringValue from_location = 2;
+  google.protobuf.StringValue to_location = 3;
+  google.protobuf.StringValue preferred_date = 4;
+  google.protobuf.Int32Value responsible_id = 5;
+  google.protobuf.Int32Value status_id = 6;
+  google.protobuf.Int32Value request_id = 7;
+}
+
+message UpdateRequestResponse {
+  bool success = 1;
+}
+
+message DeleteRequestInput {
+  google.protobuf.Int32Value request_id = 1;
+}
+
+message DeleteRequestResponse {
+  bool success = 1;
+}

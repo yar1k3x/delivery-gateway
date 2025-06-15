@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "TransportManagementService/proto;proto";
+
+import "google/protobuf/wrappers.proto";
+
+service TransportService {
+  rpc CreateTransport (CreateTransportRequest) returns (CreateTransportResponse);
+  rpc UpdateTransport (UpdateTransportRequest) returns (UpdateTransportResponse);
+  rpc GetTransportInfo (GetTransportInfoRequest) returns (GetTransportInfoResponse);
+  rpc CreateTransportLog (CreateTransportLogRequest) returns (CreateTransportLogResponse);
+  rpc GetTransportLogsInfo (GetTransportLogsInfoRequest) returns (GetTransportLogsInfoResponse);
+}
+
+message CreateTransportRequest {
+  string number = 1;
+  int32 type_id = 2;
+  int32 is_active = 3;
+  int32 current_driver_id = 4;
+}
+
+message CreateTransportResponse {
+  bool success = 1;
+  int64 transport_id = 2;
+}
+
+message UpdateTransportRequest {
+  google.protobuf.Int32Value transport_id = 1;
+  google.protobuf.Int32Value is_active = 2;
+  google.protobuf.Int32Value current_driver_id = 3;
+}
+
+message UpdateTransportResponse {
+  bool success = 1;
+}
+
+message GetTransportInfoRequest {
+  google.protobuf.Int32Value transport_id = 1;
+  google.protobuf.Int32Value is_active = 2;
+  google.protobuf.Int32Value current_driver_id = 3;
+}
+
+message GetTransportInfoResponse {
+  repeated TransportInfo transports = 1;
+}
+
+message TransportInfo {
+  int32 transport_id = 1;
+  string number = 2;
+  string transport_type = 3;
+  int32 is_active = 4;
+  int32 current_driver_id = 5;
+}
+
+message CreateTransportLogRequest {
+  int32 transport_id = 2;
+  int32 service_type_id = 3;
+  string service_date = 4;
+  string description = 5;
+  int32 mileage = 6;
+}
+
+message CreateTransportLogResponse {
+  bool success = 1;
+}
+
+message TransportLogInfo {
+  int32 id = 1;
+  int32 transport_id = 2;
+  string service_type = 3;
+  string description = 4;
+  int32 mileage = 5;
+  string service_date = 6;
+}
+
+message GetTransportLogsInfoRequest {
+  google.protobuf.Int32Value transport_id = 1;
+}
+
+message GetTransportLogsInfoResponse {
+  repeated TransportLogInfo transport_logs = 1;
+}
