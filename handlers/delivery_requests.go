@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"DeliveryGateway/client"
-	"DeliveryGateway/proto/delivery"
+	proto "DeliveryGateway/proto/delivery"
 
 	"github.com/gin-gonic/gin"
 	"google.golang.org/protobuf/types/known/wrapperspb"
@@ -173,5 +173,34 @@ func DeleteDeliveryRequest(grpcClient *client.DeliveryClient) gin.HandlerFunc {
 		}
 
 		c.JSON(http.StatusOK, gin.H{"success": resp.Success})
+	}
+}
+
+func ExportDeliveryRequestsCSV(grpcClient *client.DeliveryClient) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var in proto.GetRequestInput
+		if v := c.Query("user_id"); v != "" {
+			if id, err := strconv.Atoi(v); err == nil {
+				in.UserId = &wrapperspb.Int32Value{Value: int32(id)}
+			}
+		}
+		if v := c.Query("status_id"); v != "" {
+			if id, err := strconv.Atoi(v); err == nil {
+				in.StatusId = &wrapperspb.Int32Value{Value: int32(id)}
+			}
+		}
+
+		token := c.GetHeader("Authorization")
+		ctx := grpcClient.WithToken(context.Background(), token)
+
+		resp, err := grpcClient.Client.ExportCSV(ctx, &in)
+		if err != nil {
+			c.JSON(http.StatusBadGateway, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.Header("Content-Type", "text/csv; charset=utf-8")
+		c.Header("Content-Disposition", `attachment; filename="delivery_requests.csv"`)
+		c.Data(http.StatusOK, "text/csv; charset=utf-8", resp.Data)
 	}
 }

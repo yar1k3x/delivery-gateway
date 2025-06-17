@@ -586,6 +586,50 @@ func (x *DeleteRequestResponse) GetSuccess() bool {
 	return false
 }
 
+type ExportCSVResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []byte                 `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExportCSVResponse) Reset() {
+	*x = ExportCSVResponse{}
+	mi := &file_proto_delivery_drs_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExportCSVResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExportCSVResponse) ProtoMessage() {}
+
+func (x *ExportCSVResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_delivery_drs_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExportCSVResponse.ProtoReflect.Descriptor instead.
+func (*ExportCSVResponse) Descriptor() ([]byte, []int) {
+	return file_proto_delivery_drs_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ExportCSVResponse) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_proto_delivery_drs_proto protoreflect.FileDescriptor
 
 const file_proto_delivery_drs_proto_rawDesc = "" +
@@ -639,13 +683,16 @@ const file_proto_delivery_drs_proto_rawDesc = "" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\trequestId\"1\n" +
 	"\x15DeleteRequestResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xa7\x02\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"'\n" +
+	"\x11ExportCSVResponse\x12\x12\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data2\xe2\x02\n" +
 	"\x16DeliveryRequestService\x12D\n" +
 	"\rCreateRequest\x12\x17.drs.CreateRequestInput\x1a\x1a.drs.CreateRequestResponse\x12;\n" +
 	"\n" +
 	"GetRequest\x12\x14.drs.GetRequestInput\x1a\x17.drs.GetRequestResponse\x12D\n" +
 	"\rUpdateRequest\x12\x17.drs.UpdateRequestInput\x1a\x1a.drs.UpdateRequestResponse\x12D\n" +
-	"\rDeleteRequest\x12\x17.drs.DeleteRequestInput\x1a\x1a.drs.DeleteRequestResponseB\x17Z\x15/proto/delivery;protob\x06proto3"
+	"\rDeleteRequest\x12\x17.drs.DeleteRequestInput\x1a\x1a.drs.DeleteRequestResponse\x129\n" +
+	"\tExportCSV\x12\x14.drs.GetRequestInput\x1a\x16.drs.ExportCSVResponseB\x17Z\x15/proto/delivery;protob\x06proto3"
 
 var (
 	file_proto_delivery_drs_proto_rawDescOnce sync.Once
@@ -659,7 +706,7 @@ func file_proto_delivery_drs_proto_rawDescGZIP() []byte {
 	return file_proto_delivery_drs_proto_rawDescData
 }
 
-var file_proto_delivery_drs_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_proto_delivery_drs_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_proto_delivery_drs_proto_goTypes = []any{
 	(*CreateRequestInput)(nil),     // 0: drs.CreateRequestInput
 	(*CreateRequestResponse)(nil),  // 1: drs.CreateRequestResponse
@@ -670,32 +717,35 @@ var file_proto_delivery_drs_proto_goTypes = []any{
 	(*UpdateRequestResponse)(nil),  // 6: drs.UpdateRequestResponse
 	(*DeleteRequestInput)(nil),     // 7: drs.DeleteRequestInput
 	(*DeleteRequestResponse)(nil),  // 8: drs.DeleteRequestResponse
-	(*wrapperspb.Int32Value)(nil),  // 9: google.protobuf.Int32Value
-	(*wrapperspb.FloatValue)(nil),  // 10: google.protobuf.FloatValue
-	(*wrapperspb.StringValue)(nil), // 11: google.protobuf.StringValue
+	(*ExportCSVResponse)(nil),      // 9: drs.ExportCSVResponse
+	(*wrapperspb.Int32Value)(nil),  // 10: google.protobuf.Int32Value
+	(*wrapperspb.FloatValue)(nil),  // 11: google.protobuf.FloatValue
+	(*wrapperspb.StringValue)(nil), // 12: google.protobuf.StringValue
 }
 var file_proto_delivery_drs_proto_depIdxs = []int32{
-	9,  // 0: drs.GetRequestInput.user_id:type_name -> google.protobuf.Int32Value
-	9,  // 1: drs.GetRequestInput.status_id:type_name -> google.protobuf.Int32Value
+	10, // 0: drs.GetRequestInput.user_id:type_name -> google.protobuf.Int32Value
+	10, // 1: drs.GetRequestInput.status_id:type_name -> google.protobuf.Int32Value
 	4,  // 2: drs.GetRequestResponse.requests:type_name -> drs.DeliveryRequest
-	10, // 3: drs.UpdateRequestInput.weight:type_name -> google.protobuf.FloatValue
-	11, // 4: drs.UpdateRequestInput.from_location:type_name -> google.protobuf.StringValue
-	11, // 5: drs.UpdateRequestInput.to_location:type_name -> google.protobuf.StringValue
-	11, // 6: drs.UpdateRequestInput.preferred_date:type_name -> google.protobuf.StringValue
-	9,  // 7: drs.UpdateRequestInput.responsible_id:type_name -> google.protobuf.Int32Value
-	9,  // 8: drs.UpdateRequestInput.status_id:type_name -> google.protobuf.Int32Value
-	9,  // 9: drs.UpdateRequestInput.request_id:type_name -> google.protobuf.Int32Value
-	9,  // 10: drs.DeleteRequestInput.request_id:type_name -> google.protobuf.Int32Value
+	11, // 3: drs.UpdateRequestInput.weight:type_name -> google.protobuf.FloatValue
+	12, // 4: drs.UpdateRequestInput.from_location:type_name -> google.protobuf.StringValue
+	12, // 5: drs.UpdateRequestInput.to_location:type_name -> google.protobuf.StringValue
+	12, // 6: drs.UpdateRequestInput.preferred_date:type_name -> google.protobuf.StringValue
+	10, // 7: drs.UpdateRequestInput.responsible_id:type_name -> google.protobuf.Int32Value
+	10, // 8: drs.UpdateRequestInput.status_id:type_name -> google.protobuf.Int32Value
+	10, // 9: drs.UpdateRequestInput.request_id:type_name -> google.protobuf.Int32Value
+	10, // 10: drs.DeleteRequestInput.request_id:type_name -> google.protobuf.Int32Value
 	0,  // 11: drs.DeliveryRequestService.CreateRequest:input_type -> drs.CreateRequestInput
 	2,  // 12: drs.DeliveryRequestService.GetRequest:input_type -> drs.GetRequestInput
 	5,  // 13: drs.DeliveryRequestService.UpdateRequest:input_type -> drs.UpdateRequestInput
 	7,  // 14: drs.DeliveryRequestService.DeleteRequest:input_type -> drs.DeleteRequestInput
-	1,  // 15: drs.DeliveryRequestService.CreateRequest:output_type -> drs.CreateRequestResponse
-	3,  // 16: drs.DeliveryRequestService.GetRequest:output_type -> drs.GetRequestResponse
-	6,  // 17: drs.DeliveryRequestService.UpdateRequest:output_type -> drs.UpdateRequestResponse
-	8,  // 18: drs.DeliveryRequestService.DeleteRequest:output_type -> drs.DeleteRequestResponse
-	15, // [15:19] is the sub-list for method output_type
-	11, // [11:15] is the sub-list for method input_type
+	2,  // 15: drs.DeliveryRequestService.ExportCSV:input_type -> drs.GetRequestInput
+	1,  // 16: drs.DeliveryRequestService.CreateRequest:output_type -> drs.CreateRequestResponse
+	3,  // 17: drs.DeliveryRequestService.GetRequest:output_type -> drs.GetRequestResponse
+	6,  // 18: drs.DeliveryRequestService.UpdateRequest:output_type -> drs.UpdateRequestResponse
+	8,  // 19: drs.DeliveryRequestService.DeleteRequest:output_type -> drs.DeleteRequestResponse
+	9,  // 20: drs.DeliveryRequestService.ExportCSV:output_type -> drs.ExportCSVResponse
+	16, // [16:21] is the sub-list for method output_type
+	11, // [11:16] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name
 	11, // [11:11] is the sub-list for extension extendee
 	0,  // [0:11] is the sub-list for field type_name
@@ -712,7 +762,7 @@ func file_proto_delivery_drs_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_delivery_drs_proto_rawDesc), len(file_proto_delivery_drs_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

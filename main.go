@@ -49,6 +49,7 @@ func main() {
 	{
 		deliveryApi.POST("/create", handlers.CreateDeliveryRequest(deliveryGrpcClient))
 		deliveryApi.GET("/requests", handlers.GetDeliveryRequests(deliveryGrpcClient))
+		deliveryApi.GET("/export", handlers.ExportDeliveryRequestsCSV(deliveryGrpcClient))
 		deliveryApi.PUT("/update", handlers.UpdateDeliveryRequest(deliveryGrpcClient))
 		deliveryApi.DELETE("/delete/:id", handlers.DeleteDeliveryRequest(deliveryGrpcClient))
 	}
