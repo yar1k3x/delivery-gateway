@@ -1,11 +1,13 @@
 syntax = "proto3";
 
 package auth;
+import "google/protobuf/wrappers.proto";
 
 option go_package = "/proto/delivery;proto";
 service AuthService {
   rpc Register (RegisterRequest) returns (AuthResponse);
   rpc Login (LoginRequest) returns (AuthResponse);
+  rpc GetUsers (GetUsersRequest) returns (GetUsersResponse);
 }
 
 message RegisterRequest {
@@ -23,4 +25,20 @@ message LoginRequest {
 message AuthResponse {
   string token = 1;
   string error = 2;
+}
+
+message GetUsersRequest {
+  google.protobuf.Int32Value user_id = 1;
+  google.protobuf.Int32Value role_id = 2;
+}
+
+message UserTemplate {
+  int32 id = 1;
+  string fio = 2;
+  string email = 3;
+  string role = 4;
+}
+
+message GetUsersResponse {
+  repeated UserTemplate users = 1;
 }

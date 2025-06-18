@@ -58,6 +58,7 @@ func main() {
 	{
 		authApi.POST("/register", handlers.Register(authGrpcClient))
 		authApi.POST("/login", handlers.Login(authGrpcClient))
+		authApi.GET("/users", handlers.GetUsers(authGrpcClient))
 	}
 
 	err = r.Run(":8080")
