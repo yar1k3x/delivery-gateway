@@ -9,6 +9,7 @@ import (
 	proto "DeliveryGateway/proto/delivery"
 
 	"github.com/gin-gonic/gin"
+	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -202,5 +203,22 @@ func ExportDeliveryRequestsCSV(grpcClient *client.DeliveryClient) gin.HandlerFun
 		c.Header("Content-Type", "text/csv; charset=utf-8")
 		c.Header("Content-Disposition", `attachment; filename="delivery_requests.csv"`)
 		c.Data(http.StatusOK, "text/csv; charset=utf-8", resp.Data)
+	}
+}
+
+func GetRequestStatuses(grpcClient *client.DeliveryClient) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		req := &emptypb.Empty{}
+
+		token := c.GetHeader("Authorization")
+		ctx := grpcClient.WithToken(context.Background(), token)
+
+		resp, err := grpcClient.Client.GetRequestStatuses(ctx, req)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"statuses": resp.Statuses})
 	}
 }

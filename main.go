@@ -52,6 +52,7 @@ func main() {
 		deliveryApi.GET("/export", handlers.ExportDeliveryRequestsCSV(deliveryGrpcClient))
 		deliveryApi.PUT("/update", handlers.UpdateDeliveryRequest(deliveryGrpcClient))
 		deliveryApi.DELETE("/delete/:id", handlers.DeleteDeliveryRequest(deliveryGrpcClient))
+		deliveryApi.GET("/statuses", handlers.GetRequestStatuses(deliveryGrpcClient))
 	}
 
 	authApi := r.Group("/auth")
