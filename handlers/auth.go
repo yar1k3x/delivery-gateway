@@ -77,6 +77,6 @@ func GetUsers(grpcClient *client.AuthClient) gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"requests": resp.Users})
+		c.JSON(http.StatusOK, gin.H{"users": resp.Users})
 	}
 }
