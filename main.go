@@ -44,6 +44,7 @@ func main() {
 		transportApi.GET("/logs", handlers.GetTransportLogInfo(transportGrpcClient))
 		transportApi.PUT("/update", handlers.UpdateTransport(transportGrpcClient))
 		transportApi.GET("/types", handlers.GetTransportType(transportGrpcClient))
+		transportApi.GET("/service-types", handlers.GetServiceType(transportGrpcClient))
 	}
 
 	deliveryApi := r.Group("/delivery")
