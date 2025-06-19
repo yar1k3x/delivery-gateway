@@ -5,13 +5,16 @@ package proto;
 option go_package = "TransportManagementService/proto;proto";
 
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
 
 service TransportService {
-  rpc CreateTransport (CreateTransportRequest) returns (CreateTransportResponse);
-  rpc UpdateTransport (UpdateTransportRequest) returns (UpdateTransportResponse);
-  rpc GetTransportInfo (GetTransportInfoRequest) returns (GetTransportInfoResponse);
-  rpc CreateTransportLog (CreateTransportLogRequest) returns (CreateTransportLogResponse);
-  rpc GetTransportLogsInfo (GetTransportLogsInfoRequest) returns (GetTransportLogsInfoResponse);
+  rpc CreateTransport(CreateTransportRequest) returns (CreateTransportResponse);
+  rpc UpdateTransport(UpdateTransportRequest) returns (UpdateTransportResponse);
+  rpc GetTransportInfo(GetTransportInfoRequest) returns (GetTransportInfoResponse);
+  rpc CreateTransportLog(CreateTransportLogRequest) returns (CreateTransportLogResponse);
+  rpc GetTransportLogsInfo(GetTransportLogsInfoRequest) returns (GetTransportLogsInfoResponse);
+  rpc GetTransportType(google.protobuf.Empty) returns (GetTransportTypeResponse);
+  rpc GetServiceType(google.protobuf.Empty) returns (GetServiceTypeResponse);
 }
 
 message CreateTransportRequest {
@@ -48,10 +51,11 @@ message GetTransportInfoResponse {
 
 message TransportInfo {
   int32 transport_id = 1;
-  string number = 2;
-  string transport_type = 3;
-  int32 is_active = 4;
-  int32 current_driver_id = 5;
+  string transport_name = 2;
+  string number = 3;
+  int32 transport_type_id = 4;
+  int32 is_active = 5;
+  int32 current_driver_id = 6;
 }
 
 message CreateTransportLogRequest {
@@ -81,4 +85,26 @@ message GetTransportLogsInfoRequest {
 
 message GetTransportLogsInfoResponse {
   repeated TransportLogInfo transport_logs = 1;
+}
+
+message GetTransportTypeRequest {}
+
+message TransportType {
+  int32 id = 1;
+  string type_name = 2;
+}
+
+message GetTransportTypeResponse{
+  repeated TransportType types = 1;
+}
+
+message GetServiceTypeRequest {}
+
+message ServiceType {
+  int32 id = 1;
+  string type_name = 2;
+}
+
+message GetServiceTypeResponse{
+  repeated ServiceType types = 1;
 }

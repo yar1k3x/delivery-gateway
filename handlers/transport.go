@@ -2,13 +2,14 @@ package handlers
 
 import (
 	"DeliveryGateway/client"
-	"DeliveryGateway/proto/transport"
+	proto "DeliveryGateway/proto/transport"
 	"context"
 	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -115,7 +116,7 @@ func GetTransportInfo(grpcClient *client.TransportClient) gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(http.StatusOK, resp.Transports)
+		c.JSON(http.StatusOK, gin.H{"transports": resp.Transports})
 	}
 }
 
@@ -177,5 +178,39 @@ func UpdateTransport(grpcClient *client.TransportClient) gin.HandlerFunc {
 		c.JSON(http.StatusOK, gin.H{
 			"success": resp.Success,
 		})
+	}
+}
+
+func GetTransportType(grpcClient *client.TransportClient) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		req := &emptypb.Empty{}
+
+		token := c.GetHeader("Authorization")
+		ctx := grpcClient.WithToken(context.Background(), token)
+
+		resp, err := grpcClient.Client.GetTransportType(ctx, req)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"types": resp.Types})
+	}
+}
+
+func GetServiceType(grpcClient *client.TransportClient) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		req := &emptypb.Empty{}
+
+		token := c.GetHeader("Authorization")
+		ctx := grpcClient.WithToken(context.Background(), token)
+
+		resp, err := grpcClient.Client.GetServiceType(ctx, req)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"types": resp.Types})
 	}
 }
