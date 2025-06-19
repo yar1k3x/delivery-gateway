@@ -73,7 +73,7 @@ message CreateTransportLogResponse {
 message TransportLogInfo {
   int32 id = 1;
   int32 transport_id = 2;
-  string service_type = 3;
+  int32 service_type_id = 3;
   string description = 4;
   int32 mileage = 5;
   string service_date = 6;
