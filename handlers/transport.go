@@ -139,7 +139,7 @@ func GetTransportLogInfo(grpcClient *client.TransportClient) gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(http.StatusOK, resp.TransportLogs)
+		c.JSON(http.StatusOK, gin.H{"transportLogs": resp.TransportLogs})
 	}
 }
 
