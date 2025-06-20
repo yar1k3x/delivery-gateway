@@ -17,6 +17,7 @@ func CreateTransport(grpcClient *client.TransportClient) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var req struct {
 			Number          string `json:"number"`
+			TransportName   string `json:"transport_name"`
 			TypeID          int32  `json:"type_id"`
 			IsActive        int32  `json:"is_active"`
 			CurrentDriverID int32  `json:"current_driver_id"`
@@ -33,6 +34,7 @@ func CreateTransport(grpcClient *client.TransportClient) gin.HandlerFunc {
 
 		resp, err := grpcClient.Client.CreateTransport(ctx, &proto.CreateTransportRequest{
 			Number:          req.Number,
+			TransportName:   req.TransportName,
 			TypeId:          req.TypeID,
 			IsActive:        req.IsActive,
 			CurrentDriverId: req.CurrentDriverID,

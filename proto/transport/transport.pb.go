@@ -26,9 +26,10 @@ const (
 type CreateTransportRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Number          string                 `protobuf:"bytes,1,opt,name=number,proto3" json:"number,omitempty"`
-	TypeId          int32                  `protobuf:"varint,2,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
-	IsActive        int32                  `protobuf:"varint,3,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	CurrentDriverId int32                  `protobuf:"varint,4,opt,name=current_driver_id,json=currentDriverId,proto3" json:"current_driver_id,omitempty"`
+	TransportName   string                 `protobuf:"bytes,2,opt,name=transport_name,json=transportName,proto3" json:"transport_name,omitempty"`
+	TypeId          int32                  `protobuf:"varint,3,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
+	IsActive        int32                  `protobuf:"varint,4,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	CurrentDriverId int32                  `protobuf:"varint,5,opt,name=current_driver_id,json=currentDriverId,proto3" json:"current_driver_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -66,6 +67,13 @@ func (*CreateTransportRequest) Descriptor() ([]byte, []int) {
 func (x *CreateTransportRequest) GetNumber() string {
 	if x != nil {
 		return x.Number
+	}
+	return ""
+}
+
+func (x *CreateTransportRequest) GetTransportName() string {
+	if x != nil {
+		return x.TransportName
 	}
 	return ""
 }
@@ -995,12 +1003,13 @@ var File_proto_transport_transport_proto protoreflect.FileDescriptor
 
 const file_proto_transport_transport_proto_rawDesc = "" +
 	"\n" +
-	"\x1fproto/transport/transport.proto\x12\x05proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\"\x92\x01\n" +
+	"\x1fproto/transport/transport.proto\x12\x05proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xb9\x01\n" +
 	"\x16CreateTransportRequest\x12\x16\n" +
-	"\x06number\x18\x01 \x01(\tR\x06number\x12\x17\n" +
-	"\atype_id\x18\x02 \x01(\x05R\x06typeId\x12\x1b\n" +
-	"\tis_active\x18\x03 \x01(\x05R\bisActive\x12*\n" +
-	"\x11current_driver_id\x18\x04 \x01(\x05R\x0fcurrentDriverId\"V\n" +
+	"\x06number\x18\x01 \x01(\tR\x06number\x12%\n" +
+	"\x0etransport_name\x18\x02 \x01(\tR\rtransportName\x12\x17\n" +
+	"\atype_id\x18\x03 \x01(\x05R\x06typeId\x12\x1b\n" +
+	"\tis_active\x18\x04 \x01(\x05R\bisActive\x12*\n" +
+	"\x11current_driver_id\x18\x05 \x01(\x05R\x0fcurrentDriverId\"V\n" +
 	"\x17CreateTransportResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12!\n" +
 	"\ftransport_id\x18\x02 \x01(\x03R\vtransportId\"\xdb\x01\n" +
