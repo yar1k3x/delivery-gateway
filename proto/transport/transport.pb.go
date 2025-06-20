@@ -160,10 +160,11 @@ func (x *CreateTransportResponse) GetTransportId() int64 {
 }
 
 type UpdateTransportRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	TransportId     *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=transport_id,json=transportId,proto3" json:"transport_id,omitempty"`
-	IsActive        *wrapperspb.Int32Value `protobuf:"bytes,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	CurrentDriverId *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=current_driver_id,json=currentDriverId,proto3" json:"current_driver_id,omitempty"`
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	TransportId     *wrapperspb.Int32Value  `protobuf:"bytes,1,opt,name=transport_id,json=transportId,proto3" json:"transport_id,omitempty"`
+	IsActive        *wrapperspb.Int32Value  `protobuf:"bytes,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	CurrentDriverId *wrapperspb.Int32Value  `protobuf:"bytes,3,opt,name=current_driver_id,json=currentDriverId,proto3" json:"current_driver_id,omitempty"`
+	ImageUrl        *wrapperspb.StringValue `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -215,6 +216,13 @@ func (x *UpdateTransportRequest) GetIsActive() *wrapperspb.Int32Value {
 func (x *UpdateTransportRequest) GetCurrentDriverId() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.CurrentDriverId
+	}
+	return nil
+}
+
+func (x *UpdateTransportRequest) GetImageUrl() *wrapperspb.StringValue {
+	if x != nil {
+		return x.ImageUrl
 	}
 	return nil
 }
@@ -1029,11 +1037,12 @@ const file_proto_transport_transport_proto_rawDesc = "" +
 	"\timage_url\x18\x06 \x01(\tR\bimageUrl\"V\n" +
 	"\x17CreateTransportResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12!\n" +
-	"\ftransport_id\x18\x02 \x01(\x03R\vtransportId\"\xdb\x01\n" +
+	"\ftransport_id\x18\x02 \x01(\x03R\vtransportId\"\x96\x02\n" +
 	"\x16UpdateTransportRequest\x12>\n" +
 	"\ftransport_id\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\vtransportId\x128\n" +
 	"\tis_active\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\bisActive\x12G\n" +
-	"\x11current_driver_id\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0fcurrentDriverId\"3\n" +
+	"\x11current_driver_id\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0fcurrentDriverId\x129\n" +
+	"\timage_url\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\bimageUrl\"3\n" +
 	"\x17UpdateTransportResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xdc\x01\n" +
 	"\x17GetTransportInfoRequest\x12>\n" +
@@ -1125,39 +1134,41 @@ var file_proto_transport_transport_proto_goTypes = []any{
 	(*ServiceType)(nil),                  // 16: proto.ServiceType
 	(*GetServiceTypeResponse)(nil),       // 17: proto.GetServiceTypeResponse
 	(*wrapperspb.Int32Value)(nil),        // 18: google.protobuf.Int32Value
-	(*emptypb.Empty)(nil),                // 19: google.protobuf.Empty
+	(*wrapperspb.StringValue)(nil),       // 19: google.protobuf.StringValue
+	(*emptypb.Empty)(nil),                // 20: google.protobuf.Empty
 }
 var file_proto_transport_transport_proto_depIdxs = []int32{
 	18, // 0: proto.UpdateTransportRequest.transport_id:type_name -> google.protobuf.Int32Value
 	18, // 1: proto.UpdateTransportRequest.is_active:type_name -> google.protobuf.Int32Value
 	18, // 2: proto.UpdateTransportRequest.current_driver_id:type_name -> google.protobuf.Int32Value
-	18, // 3: proto.GetTransportInfoRequest.transport_id:type_name -> google.protobuf.Int32Value
-	18, // 4: proto.GetTransportInfoRequest.is_active:type_name -> google.protobuf.Int32Value
-	18, // 5: proto.GetTransportInfoRequest.current_driver_id:type_name -> google.protobuf.Int32Value
-	6,  // 6: proto.GetTransportInfoResponse.transports:type_name -> proto.TransportInfo
-	18, // 7: proto.GetTransportLogsInfoRequest.transport_id:type_name -> google.protobuf.Int32Value
-	9,  // 8: proto.GetTransportLogsInfoResponse.transport_logs:type_name -> proto.TransportLogInfo
-	13, // 9: proto.GetTransportTypeResponse.types:type_name -> proto.TransportType
-	16, // 10: proto.GetServiceTypeResponse.types:type_name -> proto.ServiceType
-	0,  // 11: proto.TransportService.CreateTransport:input_type -> proto.CreateTransportRequest
-	2,  // 12: proto.TransportService.UpdateTransport:input_type -> proto.UpdateTransportRequest
-	4,  // 13: proto.TransportService.GetTransportInfo:input_type -> proto.GetTransportInfoRequest
-	7,  // 14: proto.TransportService.CreateTransportLog:input_type -> proto.CreateTransportLogRequest
-	10, // 15: proto.TransportService.GetTransportLogsInfo:input_type -> proto.GetTransportLogsInfoRequest
-	19, // 16: proto.TransportService.GetTransportType:input_type -> google.protobuf.Empty
-	19, // 17: proto.TransportService.GetServiceType:input_type -> google.protobuf.Empty
-	1,  // 18: proto.TransportService.CreateTransport:output_type -> proto.CreateTransportResponse
-	3,  // 19: proto.TransportService.UpdateTransport:output_type -> proto.UpdateTransportResponse
-	5,  // 20: proto.TransportService.GetTransportInfo:output_type -> proto.GetTransportInfoResponse
-	8,  // 21: proto.TransportService.CreateTransportLog:output_type -> proto.CreateTransportLogResponse
-	11, // 22: proto.TransportService.GetTransportLogsInfo:output_type -> proto.GetTransportLogsInfoResponse
-	14, // 23: proto.TransportService.GetTransportType:output_type -> proto.GetTransportTypeResponse
-	17, // 24: proto.TransportService.GetServiceType:output_type -> proto.GetServiceTypeResponse
-	18, // [18:25] is the sub-list for method output_type
-	11, // [11:18] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	19, // 3: proto.UpdateTransportRequest.image_url:type_name -> google.protobuf.StringValue
+	18, // 4: proto.GetTransportInfoRequest.transport_id:type_name -> google.protobuf.Int32Value
+	18, // 5: proto.GetTransportInfoRequest.is_active:type_name -> google.protobuf.Int32Value
+	18, // 6: proto.GetTransportInfoRequest.current_driver_id:type_name -> google.protobuf.Int32Value
+	6,  // 7: proto.GetTransportInfoResponse.transports:type_name -> proto.TransportInfo
+	18, // 8: proto.GetTransportLogsInfoRequest.transport_id:type_name -> google.protobuf.Int32Value
+	9,  // 9: proto.GetTransportLogsInfoResponse.transport_logs:type_name -> proto.TransportLogInfo
+	13, // 10: proto.GetTransportTypeResponse.types:type_name -> proto.TransportType
+	16, // 11: proto.GetServiceTypeResponse.types:type_name -> proto.ServiceType
+	0,  // 12: proto.TransportService.CreateTransport:input_type -> proto.CreateTransportRequest
+	2,  // 13: proto.TransportService.UpdateTransport:input_type -> proto.UpdateTransportRequest
+	4,  // 14: proto.TransportService.GetTransportInfo:input_type -> proto.GetTransportInfoRequest
+	7,  // 15: proto.TransportService.CreateTransportLog:input_type -> proto.CreateTransportLogRequest
+	10, // 16: proto.TransportService.GetTransportLogsInfo:input_type -> proto.GetTransportLogsInfoRequest
+	20, // 17: proto.TransportService.GetTransportType:input_type -> google.protobuf.Empty
+	20, // 18: proto.TransportService.GetServiceType:input_type -> google.protobuf.Empty
+	1,  // 19: proto.TransportService.CreateTransport:output_type -> proto.CreateTransportResponse
+	3,  // 20: proto.TransportService.UpdateTransport:output_type -> proto.UpdateTransportResponse
+	5,  // 21: proto.TransportService.GetTransportInfo:output_type -> proto.GetTransportInfoResponse
+	8,  // 22: proto.TransportService.CreateTransportLog:output_type -> proto.CreateTransportLogResponse
+	11, // 23: proto.TransportService.GetTransportLogsInfo:output_type -> proto.GetTransportLogsInfoResponse
+	14, // 24: proto.TransportService.GetTransportType:output_type -> proto.GetTransportTypeResponse
+	17, // 25: proto.TransportService.GetServiceType:output_type -> proto.GetServiceTypeResponse
+	19, // [19:26] is the sub-list for method output_type
+	12, // [12:19] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_proto_transport_transport_proto_init() }

@@ -150,9 +150,10 @@ func GetTransportLogInfo(grpcClient *client.TransportClient) gin.HandlerFunc {
 func UpdateTransport(grpcClient *client.TransportClient) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var json struct {
-			TransportID     *int32 `json:"transport_id"`
-			IsActive        *int32 `json:"is_active"`
-			CurrentDriverID *int32 `json:"current_driver_id"`
+			TransportID     *int32  `json:"transport_id"`
+			IsActive        *int32  `json:"is_active"`
+			CurrentDriverID *int32  `json:"current_driver_id"`
+			ImageUrl        *string `json:"image_url"`
 		}
 
 		if err := c.ShouldBindJSON(&json); err != nil || json.TransportID == nil {
@@ -169,7 +170,9 @@ func UpdateTransport(grpcClient *client.TransportClient) gin.HandlerFunc {
 		if json.CurrentDriverID != nil {
 			req.CurrentDriverId = wrapperspb.Int32(*json.CurrentDriverID)
 		}
-
+		if json.ImageUrl != nil {
+			req.ImageUrl = wrapperspb.String(*json.ImageUrl)
+		}
 		token := c.GetHeader("Authorization")
 		ctx := grpcClient.WithToken(context.Background(), token)
 

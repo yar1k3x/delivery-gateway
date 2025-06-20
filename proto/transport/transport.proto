@@ -35,6 +35,7 @@ message UpdateTransportRequest {
   google.protobuf.Int32Value transport_id = 1;
   google.protobuf.Int32Value is_active = 2;
   google.protobuf.Int32Value current_driver_id = 3;
+  google.protobuf.StringValue image_url = 4;
 }
 
 message UpdateTransportResponse {
