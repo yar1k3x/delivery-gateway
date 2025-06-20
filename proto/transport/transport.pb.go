@@ -30,6 +30,7 @@ type CreateTransportRequest struct {
 	TypeId          int32                  `protobuf:"varint,3,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
 	IsActive        int32                  `protobuf:"varint,4,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
 	CurrentDriverId int32                  `protobuf:"varint,5,opt,name=current_driver_id,json=currentDriverId,proto3" json:"current_driver_id,omitempty"`
+	ImageUrl        string                 `protobuf:"bytes,6,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -97,6 +98,13 @@ func (x *CreateTransportRequest) GetCurrentDriverId() int32 {
 		return x.CurrentDriverId
 	}
 	return 0
+}
+
+func (x *CreateTransportRequest) GetImageUrl() string {
+	if x != nil {
+		return x.ImageUrl
+	}
+	return ""
 }
 
 type CreateTransportResponse struct {
@@ -367,6 +375,7 @@ type TransportInfo struct {
 	TransportTypeId int32                  `protobuf:"varint,4,opt,name=transport_type_id,json=transportTypeId,proto3" json:"transport_type_id,omitempty"`
 	IsActive        int32                  `protobuf:"varint,5,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
 	CurrentDriverId int32                  `protobuf:"varint,6,opt,name=current_driver_id,json=currentDriverId,proto3" json:"current_driver_id,omitempty"`
+	ImageUrl        string                 `protobuf:"bytes,7,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -441,6 +450,13 @@ func (x *TransportInfo) GetCurrentDriverId() int32 {
 		return x.CurrentDriverId
 	}
 	return 0
+}
+
+func (x *TransportInfo) GetImageUrl() string {
+	if x != nil {
+		return x.ImageUrl
+	}
+	return ""
 }
 
 type CreateTransportLogRequest struct {
@@ -1003,13 +1019,14 @@ var File_proto_transport_transport_proto protoreflect.FileDescriptor
 
 const file_proto_transport_transport_proto_rawDesc = "" +
 	"\n" +
-	"\x1fproto/transport/transport.proto\x12\x05proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xb9\x01\n" +
+	"\x1fproto/transport/transport.proto\x12\x05proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xd6\x01\n" +
 	"\x16CreateTransportRequest\x12\x16\n" +
 	"\x06number\x18\x01 \x01(\tR\x06number\x12%\n" +
 	"\x0etransport_name\x18\x02 \x01(\tR\rtransportName\x12\x17\n" +
 	"\atype_id\x18\x03 \x01(\x05R\x06typeId\x12\x1b\n" +
 	"\tis_active\x18\x04 \x01(\x05R\bisActive\x12*\n" +
-	"\x11current_driver_id\x18\x05 \x01(\x05R\x0fcurrentDriverId\"V\n" +
+	"\x11current_driver_id\x18\x05 \x01(\x05R\x0fcurrentDriverId\x12\x1b\n" +
+	"\timage_url\x18\x06 \x01(\tR\bimageUrl\"V\n" +
 	"\x17CreateTransportResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12!\n" +
 	"\ftransport_id\x18\x02 \x01(\x03R\vtransportId\"\xdb\x01\n" +
@@ -1026,14 +1043,15 @@ const file_proto_transport_transport_proto_rawDesc = "" +
 	"\x18GetTransportInfoResponse\x124\n" +
 	"\n" +
 	"transports\x18\x01 \x03(\v2\x14.proto.TransportInfoR\n" +
-	"transports\"\xe6\x01\n" +
+	"transports\"\x83\x02\n" +
 	"\rTransportInfo\x12!\n" +
 	"\ftransport_id\x18\x01 \x01(\x05R\vtransportId\x12%\n" +
 	"\x0etransport_name\x18\x02 \x01(\tR\rtransportName\x12\x16\n" +
 	"\x06number\x18\x03 \x01(\tR\x06number\x12*\n" +
 	"\x11transport_type_id\x18\x04 \x01(\x05R\x0ftransportTypeId\x12\x1b\n" +
 	"\tis_active\x18\x05 \x01(\x05R\bisActive\x12*\n" +
-	"\x11current_driver_id\x18\x06 \x01(\x05R\x0fcurrentDriverId\"\xc5\x01\n" +
+	"\x11current_driver_id\x18\x06 \x01(\x05R\x0fcurrentDriverId\x12\x1b\n" +
+	"\timage_url\x18\a \x01(\tR\bimageUrl\"\xc5\x01\n" +
 	"\x19CreateTransportLogRequest\x12!\n" +
 	"\ftransport_id\x18\x02 \x01(\x05R\vtransportId\x12&\n" +
 	"\x0fservice_type_id\x18\x03 \x01(\x05R\rserviceTypeId\x12!\n" +

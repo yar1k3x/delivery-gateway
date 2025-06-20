@@ -21,6 +21,7 @@ func CreateTransport(grpcClient *client.TransportClient) gin.HandlerFunc {
 			TypeID          int32  `json:"type_id"`
 			IsActive        int32  `json:"is_active"`
 			CurrentDriverID int32  `json:"current_driver_id"`
+			ImageUrl        string `json:"image_url"`
 		}
 
 		if err := c.ShouldBindJSON(&req); err != nil {
@@ -38,6 +39,7 @@ func CreateTransport(grpcClient *client.TransportClient) gin.HandlerFunc {
 			TypeId:          req.TypeID,
 			IsActive:        req.IsActive,
 			CurrentDriverId: req.CurrentDriverID,
+			ImageUrl:        req.ImageUrl,
 		})
 
 		if err != nil {

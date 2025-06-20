@@ -23,6 +23,7 @@ message CreateTransportRequest {
   int32 type_id = 3;
   int32 is_active = 4;
   int32 current_driver_id = 5;
+  string image_url = 6;
 }
 
 message CreateTransportResponse {
@@ -57,6 +58,7 @@ message TransportInfo {
   int32 transport_type_id = 4;
   int32 is_active = 5;
   int32 current_driver_id = 6;
+  string image_url = 7;
 }
 
 message CreateTransportLogRequest {
